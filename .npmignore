@@ -1,4 +1,5 @@
+/.idea/
 /src/
 /test/
 .babelrc
-.eslintrc
+.eslintrc.json
