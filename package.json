@@ -1,0 +1,46 @@
+{
+  "name": "fest-webpack-loader",
+  "version": "1.0.0",
+  "description": "Webpack loader for fest",
+  "main": "es/loader.js",
+  "dependencies": {
+    "loader-utils": "^1.1.0",
+    "schema-utils": "^0.4.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^22.0.4",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.14.0",
+    "fest": "^0.12.1",
+    "jest": "^22.0.4",
+    "memory-fs": "^0.4.1",
+    "webpack": "^3.10.0"
+  },
+  "peerDependencies": {
+    "fest": "^0.12.1"
+  },
+  "scripts": {
+    "pretest": "eslint src",
+    "test": "jest",
+    "build": "babel src --out-dir=es",
+    "preversion": "npm test",
+    "postversion": "git push --tags",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogonkov/fest-webpack-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "fest"
+  ],
+  "author": "Aleksey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ogonkov/fest-webpack-loader/issues"
+  },
+  "homepage": "https://github.com/ogonkov/fest-webpack-loader#readme"
+}
