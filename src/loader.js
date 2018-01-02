@@ -6,13 +6,8 @@ import fest from 'fest';
 const schema = {
     type: 'object',
     properties: {
-        compile: {
-            type: 'object',
-            properties: {
-                beautify: {
-                    type: 'boolean'
-                }
-            }
+        beautify: {
+            type: 'boolean'
         }
     },
     additionalProperties: false
