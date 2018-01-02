@@ -36,3 +36,4 @@ module.exports = {
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`beautify`**|`{Boolean}`|`true`|Beautify compiled template|
+|**`module`**|`{String}`|`es`|Compiled template module type. `es` or `cjs`.|
