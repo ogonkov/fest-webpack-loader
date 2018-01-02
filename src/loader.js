@@ -26,21 +26,21 @@ function getModuleWrapper(compiled, moduleType) {
     }
 }
 
-const defaults = {
-    beautify: true
-};
-
-function compile(source, options = defaults) {
+function compile(source, {
+    beautify = true,
+    module = 'es',
+    resourcePath
+} = {}) {
     return function(resolve, reject) {
         try {
             const compiled = fest.compile({
-                path: options.resourcePath,
+                path: resourcePath,
                 contents: source
             }, {
-                beautify: options.beautify
+                beautify: beautify
             });
 
-            resolve(getModuleWrapper(compiled, options.module));
+            resolve(getModuleWrapper(compiled, module));
         } catch(ex) {
             reject(ex);
         }

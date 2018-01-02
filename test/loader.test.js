@@ -18,7 +18,7 @@ describe('Default usage', function() {
 
     test('Evals output to template', () => {
         var compiled = new Function(output.replace(
-            /export\s+default\s+function\s+\(/,
+            /export\s+default\s+function\s*\(/,
             'return function('
         ))();
 
