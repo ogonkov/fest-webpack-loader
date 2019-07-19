@@ -1,5 +1,7 @@
 /.idea/
 /src/
 /test/
-.babelrc
 .eslintrc.json
+.travis.yml
+babel.config.js
+jest.config.js
