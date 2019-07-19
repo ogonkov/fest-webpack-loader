@@ -5,6 +5,7 @@
     },
     "extends": "eslint:recommended",
     "parserOptions": {
+        "ecmaVersion": 9,
         "sourceType": "module"
     },
     "rules": {
@@ -27,5 +28,15 @@
             "error",
             "always"
         ]
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "test/**/*.js"
+            ],
+            "env": {
+                "jest": true
+            }
+        }
+    ]
 }

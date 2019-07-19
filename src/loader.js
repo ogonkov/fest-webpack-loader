@@ -50,7 +50,10 @@ function compile(source, {
 export default function festLoader(source) {
     const options = getOptions(this);
 
-    validateOptions(schema, options || {}, 'Fest Loader');
+    validateOptions(schema, options || {}, {
+        name: 'Fest Loader',
+        baseDataPath: 'options'
+    });
 
     const promise = new Promise(compile(source, Object.assign({}, options, {
         resourcePath: this.resourcePath

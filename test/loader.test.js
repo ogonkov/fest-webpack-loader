@@ -1,8 +1,5 @@
 import compiler from './compiler.js';
-
-function getOutput(stats) {
-    return stats.toJson().modules[0].source;
-}
+import {getOutput} from './get-output';
 
 describe('Default usage', function() {
     let stats, output;
