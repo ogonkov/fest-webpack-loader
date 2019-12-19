@@ -12,6 +12,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "babel-jest": "^24.8.0",
+    "coveralls": "^3.0.9",
     "eslint": "^6.0.1",
     "fest": "^0.12.1",
     "jest": "^24.8.0",
@@ -25,7 +26,7 @@
     "node": ">= 8.9.0"
   },
   "scripts": {
-    "pretest": "eslint src",
+    "pretest": "rm -rf test/.coverage && eslint src",
     "test": "jest",
     "build": "babel src --out-dir=es",
     "preversion": "npm test",
