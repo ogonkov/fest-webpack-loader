@@ -47,5 +47,19 @@
   "bugs": {
     "url": "https://github.com/ogonkov/fest-webpack-loader/issues"
   },
-  "homepage": "https://ogonkov.github.io/fest-webpack-loader/"
+  "homepage": "https://ogonkov.github.io/fest-webpack-loader/",
+  "greenkeeper": {
+    "ignore": [
+      "@babel/cli",
+      "@babel/core",
+      "@babel/preset-env",
+      "babel-jest",
+      "coveralls",
+      "eslint",
+      "fest",
+      "jest",
+      "memory-fs",
+      "webpack"
+    ]
+  }
 }
