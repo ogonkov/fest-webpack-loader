@@ -17,10 +17,12 @@
     "fest": "^0.12.1",
     "jest": "^24.8.0",
     "memory-fs": "^0.4.1",
-    "webpack": "^4.36.1"
+    "webpack": "^4.36.1",
+    "xml2js": "^0.4.23"
   },
   "peerDependencies": {
-    "fest": "^0.12.1"
+    "fest": "^0.12.1",
+    "xml2js": "^0.4.23"
   },
   "engines": {
     "node": ">= 8.9.0"
@@ -28,7 +30,7 @@
   "scripts": {
     "pretest": "rm -rf test/.coverage && eslint src",
     "test": "jest",
-    "build": "babel src --out-dir=es",
+    "build": "rm -rf es && babel src --out-dir=es",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "npm run build"

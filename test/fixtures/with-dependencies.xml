@@ -1,0 +1,4 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
+    <fest:include context="json.list" src="./nested-dependency.xml"/>
+    <div><fest:insert src="./styles.css"/></div>
+</fest:template>

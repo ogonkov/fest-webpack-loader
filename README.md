@@ -8,6 +8,9 @@
 
 This Webpack loader compiles [Fest](https://github.com/mailru/fest) templates.
 
+Loader is trying to build dependencies tree by walking through `<fest:include/>`
+and `<fest:insert/>` of template.
+
 ## Install
 ```bash
 npm install --save-dev fest-webpack-loader

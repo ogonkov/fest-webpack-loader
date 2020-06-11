@@ -1,7 +1,8 @@
 import {getOptions} from 'loader-utils';
 import validateOptions from 'schema-utils';
-
 import fest from 'fest';
+
+import {getDependencies} from './get-dependencies';
 
 const schema = {
     type: 'object',
@@ -48,21 +49,32 @@ function compile(source, {
 }
 
 export default function festLoader(source) {
-    const options = getOptions(this);
-
-    validateOptions(schema, options || {}, {
-        name: 'Fest Loader',
-        baseDataPath: 'options'
-    });
-
-    const promise = new Promise(compile(source, Object.assign({}, options, {
-        resourcePath: this.resourcePath
-    })));
-
     const callback = this.async();
-    promise.then(function(compiled) {
+
+    let options;
+    try {
+        options = getOptions(this);
+        validateOptions(schema, options || {}, {
+            name: 'Fest Loader',
+            baseDataPath: 'options'
+        });
+    } catch (e) {
+        callback(e);
+
+        return;
+    }
+
+    // Tracking dependencies is optional feature, that could fail
+    getDependencies(this.resourcePath, source).catch(() => []).then((deps) => {
+        deps.forEach((dep) => this.addDependency(dep));
+    }).then(() => (
+        new Promise(compile(source, {
+            ...options,
+            resourcePath: this.resourcePath
+        }))
+    )).then(function(compiled) {
         callback(null, compiled);
-    }, function(exception) {
+    }).catch(function(exception) {
         callback(exception, '');
     });
 }

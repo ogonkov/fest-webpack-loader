@@ -1,5 +1,11 @@
+import fs from 'fs';
+import path from 'path';
+import util from 'util';
+import loader from '../src/loader';
 import compiler from './compiler.js';
 import {getOutput} from './get-output';
+
+const readFile = util.promisify(fs.readFile);
 
 describe('Default usage', function() {
     let stats, output;
@@ -30,5 +36,39 @@ describe("'module' option", function() {
         }));
 
         expect(output).toMatch('module.exports = function');
+    });
+});
+
+describe('dependencies parse', function() {
+    test('should add dependencies', async function(done) {
+        const fixturePath = path.resolve('test/fixtures/with-dependencies.xml');
+        const source = await readFile(fixturePath, 'utf8');
+        const context = {
+            query: '',
+            resourcePath: fixturePath,
+            async() {
+                return function(err) {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    expect(context.addDependency).toHaveBeenCalledTimes(3);
+                    expect(context.addDependency).toHaveBeenCalledWith(
+                        expect.stringMatching('nested-dependency.xml')
+                    );
+                    expect(context.addDependency).toHaveBeenCalledWith(
+                        expect.stringMatching('styles.css')
+                    );
+                    expect(context.addDependency).toHaveBeenCalledWith(
+                        expect.stringMatching('include.xml')
+                    );
+
+                    done();
+                }
+            },
+            addDependency: jest.fn()
+        };
+
+        loader.call(context, source);
     });
 });
