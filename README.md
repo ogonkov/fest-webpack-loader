@@ -3,7 +3,6 @@
 [![node][node]][node-url] 
 [![Build Status][travis-image]][travis-url] 
 [![Dependencies Status][david-image]][david-url]
-[![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 # Fest templates loader for Webpack
 
@@ -56,5 +55,3 @@ module.exports = {
 [travis-url]:https://travis-ci.org/ogonkov/fest-webpack-loader
 [david-image]:https://david-dm.org/ogonkov/fest-webpack-loader/status.svg
 [david-url]:https://david-dm.org/ogonkov/fest-webpack-loader
-[greenkeeper-image]:https://badges.greenkeeper.io/ogonkov/fest-webpack-loader.svg
-[greenkeeper-url]:https://greenkeeper.io/
