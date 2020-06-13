@@ -1,7 +1,7 @@
 [![npm package][npm-image]][npm-url] 
 [![Coverage Status][coverage-image]][coverage-url] 
 [![node][node]][node-url] 
-[![Build Status][travis-image]][travis-url] 
+[![Build Status][build-image]][build-url] 
 [![Dependencies Status][david-image]][david-url]
 
 # Fest templates loader for Webpack
@@ -54,7 +54,7 @@ module.exports = {
 [coverage-url]:https://coveralls.io/github/ogonkov/fest-webpack-loader?branch=master
 [node]: https://img.shields.io/node/v/fest-webpack-loader.svg
 [node-url]: https://nodejs.org
-[travis-image]:https://travis-ci.org/ogonkov/fest-webpack-loader.svg?branch=master
-[travis-url]:https://travis-ci.org/ogonkov/fest-webpack-loader
+[build-image]:https://github.com/ogonkov/fest-webpack-loader/workflows/Tests/badge.svg?branch=master
+[build-url]:https://github.com/ogonkov/fest-webpack-loader/actions?query=branch%3Amaster+workflow%3ATests
 [david-image]:https://david-dm.org/ogonkov/fest-webpack-loader/status.svg
 [david-url]:https://david-dm.org/ogonkov/fest-webpack-loader
