@@ -54,7 +54,7 @@ export default function festLoader(source) {
     let options;
     try {
         options = getOptions(this);
-        validateOptions(schema, options || {}, {
+        validateOptions(schema, options, {
             name: 'Fest Loader',
             baseDataPath: 'options'
         });

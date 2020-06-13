@@ -4,7 +4,7 @@
   "description": "Webpack loader for fest",
   "main": "es/loader.js",
   "dependencies": {
-    "loader-utils": "^1.2.3",
+    "loader-utils": "^2.0.0",
     "schema-utils": "^2.0.1"
   },
   "devDependencies": {
