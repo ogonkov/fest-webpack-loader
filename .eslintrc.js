@@ -1,4 +1,6 @@
-{
+const isWindows = process.platform === 'win32';
+
+module.exports = {
     "env": {
         "es6": true,
         "node": true
@@ -18,7 +20,7 @@
         ],
         "linebreak-style": [
             "error",
-            "unix"
+            isWindows ? "windows" : "unix"
         ],
         "quotes": [
             "error",
@@ -39,4 +41,4 @@
             }
         }
     ]
-}
+};
