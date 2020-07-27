@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import util from 'util';
-import {parseStringPromise} from 'xml2js';
+import {getParser} from './get-parser';
 import {NODE_ATTRIBUTES} from './nodes';
 import {filterNodes} from './filter-nodes';
 
@@ -24,7 +24,7 @@ function getSrcAttribute({item: [attributes]}) {
  * @return {Promise<Set<string>>}
  */
 async function getFileImports(source) {
-    const root = await parseStringPromise(source);
+    const root = await getParser().then((parseString) => parseString(source));
     const nodes = filterNodes(root, [
         'fest:include',
         'fest:insert'
