@@ -5,19 +5,19 @@
   "main": "es/loader.js",
   "dependencies": {
     "loader-utils": "^2.0.0",
-    "schema-utils": "^2.0.1"
+    "schema-utils": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-jest": "^24.8.0",
+    "@babel/cli": "^7.11.5",
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
     "coveralls": "^3.0.9",
-    "eslint": "^6.0.1",
+    "eslint": "^6.8.0",
     "fest": "^0.12.1",
-    "jest": "^24.8.0",
-    "memory-fs": "^0.4.1",
-    "webpack": "^4.36.1",
+    "jest": "^25.5.4",
+    "memory-fs": "^0.5.0",
+    "webpack": "^4.44.1",
     "xml2js": "^0.4.23"
   },
   "peerDependencies": {
