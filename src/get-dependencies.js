@@ -12,7 +12,7 @@ const readFile = util.promisify(fs.readFile);
  * @return {boolean}
  */
 function hasAttributes({item: [attributes]}) {
-    return attributes && NODE_ATTRIBUTES in attributes;
+    return Boolean(attributes?.[NODE_ATTRIBUTES]);
 }
 
 function getSrcAttribute({item: [attributes]}) {
@@ -27,7 +27,8 @@ async function getFileImports(source) {
     const root = await getParser().then((parseString) => parseString(source));
     const nodes = filterNodes(root, [
         'fest:include',
-        'fest:insert'
+        'fest:insert',
+        'fest:script'
     ]);
 
     return new Set(
