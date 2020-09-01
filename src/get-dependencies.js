@@ -52,7 +52,8 @@ async function getAbsoluteFileImports(resourcePath, source) {
     return [...fileImports].map(toAbsolutePath);
 }
 
-export async function getDependencies(resourcePath, source) {
+export async function getDependencies(loaderContext, source) {
+    const {resourcePath} = loaderContext;
     const dependencies = new Set();
     let stack = [
         [resourcePath, source]
@@ -61,10 +62,17 @@ export async function getDependencies(resourcePath, source) {
     do {
         const [resourcePath, source] = stack.shift();
 
-        let absoluteFileImports = await getAbsoluteFileImports(
-            resourcePath,
-            source
-        );
+        let absoluteFileImports;
+        try {
+            absoluteFileImports = await getAbsoluteFileImports(
+                resourcePath,
+                source
+            );
+        } catch (e) {
+            loaderContext.emitWarning(e);
+
+            continue;
+        }
         absoluteFileImports = absoluteFileImports.filter((fileImport) => (
             !dependencies.has(fileImport)
         ));
@@ -80,6 +88,8 @@ export async function getDependencies(resourcePath, source) {
             try {
                 source = await readFile(fileImport, 'utf8');
             } catch (e) {
+                loaderContext.emitWarning(e);
+
                 continue;
             }
 

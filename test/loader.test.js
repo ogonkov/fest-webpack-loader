@@ -4,6 +4,7 @@ import util from 'util';
 import loader from '../src/loader';
 import compiler from './compiler.js';
 import {getOutput} from './get-output';
+import {getLoaderContext} from './get-loader-context';
 
 const readFile = util.promisify(fs.readFile);
 
@@ -40,38 +41,34 @@ describe("'module' option", function() {
 });
 
 describe('dependencies parse', function() {
-    test('should add dependencies', async function(done) {
+    test('should add dependencies', async function() {
         const fixturePath = path.resolve('test/fixtures/with-dependencies.xml');
         const source = await readFile(fixturePath, 'utf8');
-        const context = {
-            query: '',
-            resourcePath: fixturePath,
-            async() {
-                return function(err) {
-                    if (err) {
-                        return done(err);
-                    }
-
-                    expect(context.addDependency).toHaveBeenCalledTimes(4);
-                    expect(context.addDependency).toHaveBeenCalledWith(
-                        expect.stringMatching('nested-dependency.xml')
-                    );
-                    expect(context.addDependency).toHaveBeenCalledWith(
-                        expect.stringMatching('styles.css')
-                    );
-                    expect(context.addDependency).toHaveBeenCalledWith(
-                        expect.stringMatching('include.xml')
-                    );
-                    expect(context.addDependency).toHaveBeenCalledWith(
-                        expect.stringMatching('script.js')
-                    );
-
-                    done();
-                }
-            },
-            addDependency: jest.fn()
-        };
-
+        const {context, result} = getLoaderContext(fixturePath);
         loader.call(context, source);
+
+        await result;
+
+        expect(context.addDependency).toHaveBeenCalledTimes(4);
+        expect(context.addDependency).toHaveBeenCalledWith(
+            expect.stringMatching('nested-dependency.xml')
+        );
+        expect(context.addDependency).toHaveBeenCalledWith(
+            expect.stringMatching('styles.css')
+        );
+        expect(context.addDependency).toHaveBeenCalledWith(
+            expect.stringMatching('include.xml')
+        );
+        expect(context.addDependency).toHaveBeenCalledWith(
+            expect.stringMatching('script.js')
+        );
+    });
+
+    test('should log parsing warnings', async function() {
+        const stats = await compiler('fixtures/invalid.xml');
+
+        expect(stats.toJson().warnings).toEqual(expect.arrayContaining([
+            expect.stringMatching('Invalid character in entity name')
+        ]));
     });
 });

@@ -27,12 +27,20 @@ function getModuleWrapper(compiled, moduleType) {
     }
 }
 
+/**
+ * @param {string} source
+ * @param {Object} options
+ * @param {boolean} [options.beautify=true]
+ * @param {string} [options.module=es]
+ * @param {string} options.resourcePath
+ * @returns {Promise<string, Error>}
+ */
 function compile(source, {
     beautify = true,
     module = 'es',
     resourcePath
 } = {}) {
-    return function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
         try {
             const compiled = fest.compile({
                 path: resourcePath,
@@ -45,7 +53,7 @@ function compile(source, {
         } catch(ex) {
             reject(ex);
         }
-    };
+    });
 }
 
 export default function festLoader(source) {
@@ -64,15 +72,15 @@ export default function festLoader(source) {
         return;
     }
 
-    // Tracking dependencies is optional feature, that could fail
-    getDependencies(this.resourcePath, source).catch(() => []).then((deps) => {
-        deps.forEach((dep) => this.addDependency(dep));
-    }).then(() => (
-        new Promise(compile(source, {
+    Promise.all([
+        // Tracking dependencies is optional feature, that could fail
+        getDependencies(this, source).catch(() => []),
+        compile(source, {
             ...options,
             resourcePath: this.resourcePath
-        }))
-    )).then(function(compiled) {
+        })
+    ]).then(([deps, compiled]) => {
+        deps.forEach((dep) => this.addDependency(dep));
         callback(null, compiled);
     }).catch(function(exception) {
         callback(exception, '');

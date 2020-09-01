@@ -1,0 +1,7 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
+    Broken XML syntax
+
+    <fest:script>
+        var c = a && b;
+    </fest:script>
+</fest:template>
