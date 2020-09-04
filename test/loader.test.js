@@ -49,7 +49,7 @@ describe('dependencies parse', function() {
 
         await result;
 
-        expect(context.addDependency).toHaveBeenCalledTimes(4);
+        expect(context.addDependency).toHaveBeenCalledTimes(5);
         expect(context.addDependency).toHaveBeenCalledWith(
             expect.stringMatching('nested-dependency.xml')
         );
@@ -58,6 +58,9 @@ describe('dependencies parse', function() {
         );
         expect(context.addDependency).toHaveBeenCalledWith(
             expect.stringMatching('include.xml')
+        );
+        expect(context.addDependency).toHaveBeenCalledWith(
+            expect.stringMatching('another-include.xml')
         );
         expect(context.addDependency).toHaveBeenCalledWith(
             expect.stringMatching('script.js')

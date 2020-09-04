@@ -32,10 +32,10 @@ export function filterNodes(
             const {[nodeName]: nextItem} = item;
 
             if (nodeNames.includes(nodeName)) {
-                found.push({
+                found.push(...nextItem.map((item) => ({
                     name: nodeName,
-                    item: nextItem
-                });
+                    item: [item]
+                })));
 
                 continue;
             }
