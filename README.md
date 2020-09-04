@@ -8,8 +8,12 @@
 
 This Webpack loader compiles [Fest](https://github.com/mailru/fest) templates.
 
-Loader is trying to build dependencies tree by walking through `<fest:include/>`
-and `<fest:insert/>` of template.
+Loader is trying to build dependencies tree by walking through
+`<fest:include/>`, `<fest:insert/>` and `<fest:script/>` tags of template.
+
+When loader emits warning, that means that XML parser failed to parse a file
+and get dependencies from it. You probably would like to fix file syntax, to
+have complete experience with webpack rebuild on change.
 
 ## Install
 ```bash

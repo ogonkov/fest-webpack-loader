@@ -49,7 +49,7 @@ describe('dependencies parse', function() {
 
         await result;
 
-        expect(context.addDependency).toHaveBeenCalledTimes(5);
+        expect(context.addDependency).toHaveBeenCalledTimes(6);
         expect(context.addDependency).toHaveBeenCalledWith(
             expect.stringMatching('nested-dependency.xml')
         );
@@ -63,6 +63,9 @@ describe('dependencies parse', function() {
             expect.stringMatching('another-include.xml')
         );
         expect(context.addDependency).toHaveBeenCalledWith(
+            expect.stringMatching('invalid.xml')
+        );
+        expect(context.addDependency).toHaveBeenCalledWith(
             expect.stringMatching('script.js')
         );
     });
@@ -72,6 +75,14 @@ describe('dependencies parse', function() {
 
         expect(stats.toJson().warnings).toEqual(expect.arrayContaining([
             expect.stringMatching('Invalid character in entity name')
+        ]));
+    });
+
+    test('should append real file path to error', async function() {
+        const stats = await compiler('fixtures/another-include.xml');
+
+        expect(stats.toJson().warnings).toEqual(expect.arrayContaining([
+            expect.stringMatching(/fixtures[\/\\]invalid\.xml/)
         ]));
     });
 });

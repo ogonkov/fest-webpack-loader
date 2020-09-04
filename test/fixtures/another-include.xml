@@ -1,3 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
     Simple include 2
+
+    <fest:include src="./invalid.xml"/>
 </fest:template>

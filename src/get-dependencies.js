@@ -52,6 +52,17 @@ async function getAbsoluteFileImports(resourcePath, source) {
     return [...fileImports].map(toAbsolutePath);
 }
 
+/**
+ * @template {Error} TError
+ * @param {TError} error
+ * @param {string} path
+ * @returns {TError}
+ */
+function appendPathToParseError(error, path) {
+    error.message = `${error.message}\nFile: ${path}`;
+    return error;
+}
+
 export async function getDependencies(loaderContext, source) {
     const {resourcePath} = loaderContext;
     const dependencies = new Set();
@@ -69,7 +80,7 @@ export async function getDependencies(loaderContext, source) {
                 source
             );
         } catch (e) {
-            loaderContext.emitWarning(e);
+            loaderContext.emitWarning(appendPathToParseError(e, resourcePath));
 
             continue;
         }
