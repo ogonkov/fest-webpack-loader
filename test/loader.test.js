@@ -44,7 +44,9 @@ describe('dependencies parse', function() {
     test('should add dependencies', async function() {
         const fixturePath = path.resolve('test/fixtures/with-dependencies.xml');
         const source = await readFile(fixturePath, 'utf8');
-        const {context, result} = getLoaderContext(fixturePath);
+        const {context, result} = getLoaderContext(fixturePath, {
+            trackDependencies: true
+        });
         loader.call(context, source);
 
         await result;
@@ -71,7 +73,9 @@ describe('dependencies parse', function() {
     });
 
     test('should log parsing warnings', async function() {
-        const stats = await compiler('fixtures/invalid.xml');
+        const stats = await compiler('fixtures/invalid.xml', {
+            trackDependencies: true
+        });
 
         expect(stats.toJson().warnings).toEqual(expect.arrayContaining([
             expect.stringMatching('Invalid character in entity name')
@@ -79,10 +83,25 @@ describe('dependencies parse', function() {
     });
 
     test('should append real file path to error', async function() {
-        const stats = await compiler('fixtures/another-include.xml');
+        const stats = await compiler('fixtures/another-include.xml', {
+            trackDependencies: true
+        });
 
         expect(stats.toJson().warnings).toEqual(expect.arrayContaining([
             expect.stringMatching(/fixtures[\/\\]invalid\.xml/)
         ]));
+    });
+
+    test("shouldn't add dependencies when 'trackDependencies' false", async function() {
+        const fixturePath = path.resolve('test/fixtures/with-dependencies.xml');
+        const source = await readFile(fixturePath, 'utf8');
+        const {context, result} = getLoaderContext(fixturePath, {
+            trackDependencies: false
+        });
+        loader.call(context, source);
+
+        await result;
+
+        expect(context.addDependency).not.toHaveBeenCalled();
     });
 });

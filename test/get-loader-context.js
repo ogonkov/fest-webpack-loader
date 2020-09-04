@@ -1,7 +1,10 @@
-export function getLoaderContext(resourcePath) {
+export function getLoaderContext(resourcePath, options = {}) {
     const callback = jest.fn().mockName('loaderContext.callback');
+    const query = Object.entries(options).map(([key, value]) => {
+        return `${key}=${value}`;
+    }, '').join('&');
     const context = {
-        query: '',
+        query: `?${query}`,
         resourcePath,
         async: jest.fn().mockReturnValue(callback),
         addDependency: jest.fn().mockName('loaderContext.addDependency'),

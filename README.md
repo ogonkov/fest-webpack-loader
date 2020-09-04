@@ -50,6 +50,7 @@ module.exports = {
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`beautify`**|`{Boolean}`|`true`|Beautify compiled template|
+|**`trackDependencies`**|`{Boolean}`|`true` for development mode otherwise `false`|Enable template dependencies tracking|
 |**`module`**|`{String}`|`es`|Compiled template module type. `es` or `cjs`.|
 
 [npm-image]:https://img.shields.io/npm/v/fest-webpack-loader.svg

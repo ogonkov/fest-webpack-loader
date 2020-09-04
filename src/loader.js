@@ -10,6 +10,9 @@ const schema = {
         beautify: {
             type: 'boolean'
         },
+        trackDependencies: {
+            type: 'boolean'
+        },
         module: {
             enum: ['es', 'cjs']
         }
@@ -72,9 +75,17 @@ export default function festLoader(source) {
         return;
     }
 
-    Promise.all([
+    const trackDependencies = typeof options.trackDependencies !== 'boolean' ?
+        this.mode === 'development' : options.trackDependencies;
+
+    let dependencies = Promise.resolve([]);
+    if (trackDependencies) {
         // Tracking dependencies is optional feature, that could fail
-        getDependencies(this, source).catch(() => []),
+        dependencies = getDependencies(this, source).catch(() => []);
+    }
+
+    Promise.all([
+        dependencies,
         compile(source, {
             ...options,
             resourcePath: this.resourcePath
