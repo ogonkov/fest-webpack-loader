@@ -1,6 +1,6 @@
 {
   "name": "fest-webpack-loader",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Webpack loader for fest",
   "main": "es/loader.js",
   "dependencies": {
