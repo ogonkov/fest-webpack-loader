@@ -15,6 +15,9 @@ When loader emits warning, that means that XML parser failed to parse a file
 and get dependencies from it. You probably would like to fix file syntax, to
 have complete experience with webpack rebuild on change.
 
+> :exclamation: Using builtin beautifier could break ES syntax in scripts, that is inlined
+> via `<fest:script/>`. Consider switching off `beautify` option.
+
 ## Install
 ```bash
 npm install --save-dev fest-webpack-loader
@@ -49,7 +52,7 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`beautify`**|`{Boolean}`|`true`|Beautify compiled template|
+|**`beautify`**|`{Boolean}`|`false`|Beautify compiled template. Built-in `fest` beautifier breaks ES syntax.|
 |**`trackDependencies`**|`{Boolean}`|`true` for development mode otherwise `false`|Enable template dependencies tracking|
 |**`module`**|`{String}`|`es`|Compiled template module type. `es` or `cjs`.|
 

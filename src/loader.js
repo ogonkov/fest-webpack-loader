@@ -39,7 +39,7 @@ function getModuleWrapper(compiled, moduleType) {
  * @returns {Promise<string, Error>}
  */
 function compile(source, {
-    beautify = true,
+    beautify = false,
     module = 'es',
     resourcePath
 } = {}) {
