@@ -1,3 +1,5 @@
+const nodeVersion = require('./package.json').engines.node;
+
 module.exports = function(api) {
     api.cache(true);
 
@@ -7,7 +9,7 @@ module.exports = function(api) {
                 '@babel/preset-env',
                 {
                     targets: {
-                        node: '8.9.0'
+                        node: nodeVersion.replace(/>=\s+/, '')
                     }
                 }
             ]

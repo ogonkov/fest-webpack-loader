@@ -8,6 +8,8 @@
 
 This Webpack loader compiles [Fest](https://github.com/mailru/fest) templates.
 
+> For Webpack 4.x use loader versions 2.x
+
 Loader is trying to build dependencies tree by walking through
 `<fest:include/>`, `<fest:insert/>` and `<fest:script/>` tags of template.
 

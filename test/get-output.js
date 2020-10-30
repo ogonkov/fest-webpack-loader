@@ -1,3 +1,5 @@
 export function getOutput(stats) {
-    return stats.toJson().modules[0].source;
+    return stats.toJson({
+        source: true
+    }).modules[0].source;
 }

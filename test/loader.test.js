@@ -78,7 +78,9 @@ describe('dependencies parse', function() {
         });
 
         expect(stats.toJson().warnings).toEqual(expect.arrayContaining([
-            expect.stringMatching('Invalid character in entity name')
+            expect.objectContaining({
+                details: expect.stringMatching('Invalid character in entity name')
+            })
         ]));
     });
 
@@ -88,7 +90,9 @@ describe('dependencies parse', function() {
         });
 
         expect(stats.toJson().warnings).toEqual(expect.arrayContaining([
-            expect.stringMatching(/fixtures[\/\\]invalid\.xml/)
+            expect.objectContaining({
+                details: expect.stringMatching(/fixtures[\/\\]invalid\.xml/)
+            })
         ]));
     });
 

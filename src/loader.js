@@ -1,10 +1,9 @@
-import {getOptions} from 'loader-utils';
-import validateOptions from 'schema-utils';
 import fest from 'fest';
 
 import {getDependencies} from './get-dependencies';
 
 const schema = {
+    title: 'Fest Loader options',
     type: 'object',
     properties: {
         beautify: {
@@ -64,11 +63,7 @@ export default function festLoader(source) {
 
     let options;
     try {
-        options = getOptions(this);
-        validateOptions(schema, options, {
-            name: 'Fest Loader',
-            baseDataPath: 'options'
-        });
+        options = this.getOptions(schema);
     } catch (e) {
         callback(e);
 
