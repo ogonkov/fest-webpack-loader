@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
-import loader from '../src/loader';
+import {festLoader as loader} from '../src/lib/loader';
 import compiler from './compiler.js';
 import {getOutput} from './get-output';
 import {getLoaderContext} from './get-loader-context';

@@ -2,7 +2,7 @@
   "name": "fest-webpack-loader",
   "version": "2.3.0",
   "description": "Webpack loader for fest",
-  "main": "es/loader.js",
+  "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -28,7 +28,7 @@
     "lint": "eslint src",
     "pretest": "rm -rf test/.coverage && npm run lint",
     "test": "jest",
-    "build": "rm -rf es && babel src --out-dir=es",
+    "build": "rm -rf index.js lib && babel src --out-dir=.",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
     "prepack": "npm run build"

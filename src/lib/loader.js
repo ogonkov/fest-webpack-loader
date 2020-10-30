@@ -58,7 +58,7 @@ function compile(source, {
     });
 }
 
-export default function festLoader(source) {
+export function festLoader(source) {
     const callback = this.async();
 
     let options;

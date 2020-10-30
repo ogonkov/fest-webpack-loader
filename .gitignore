@@ -61,6 +61,7 @@ typings/
 .idea
 
 # Compiled module
-/es/
+/lib/
+/index.js
 
 /test/.coverage/
